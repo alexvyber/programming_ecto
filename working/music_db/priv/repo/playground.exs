@@ -1,11 +1,11 @@
-#---
+# ---
 # Excerpted from "Programming Ecto",
 # published by The Pragmatic Bookshelf.
 # Copyrights apply to this code. It may not be used to create training material,
 # courses, books, articles, and the like. Contact us if you are in doubt.
 # We make no guarantees that this code is fit for any purpose.
 # Visit http://www.pragmaticprogrammer.com/titles/wmecto for more book information.
-#---
+# ---
 ##############################################
 ## Ecto Playground
 #
@@ -43,9 +43,7 @@ defmodule Playground do
     # PUT YOUR TEST CODE HERE
     #
     ##############################################
-
   end
-
 end
 
 # add your test code to Playground.play above - this will execute it

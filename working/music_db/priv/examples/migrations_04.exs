@@ -41,13 +41,11 @@ end
 
 Ecto.Migrator.down(Repo, 2, MusicDB.Repo.Migrations.AddCompositionsArtistsTable)
 
-if Repo.using_postgres?() do
-  q =
-    from(c in "compositions",
-      where: c.title == "So What",
-      select: [:id, :title, :year, :artist_id]
-    )
+q =
+  from(c in "compositions",
+    where: c.title == "So What",
+    select: [:id, :title, :year, :artist_id]
+  )
 
-  composition = Repo.one(q)
-  assert %{title: "So What", year: 1959, artist_id: 1} = composition
-end
+composition = Repo.one(q)
+assert %{title: "So What", year: 1959, artist_id: 1} = composition

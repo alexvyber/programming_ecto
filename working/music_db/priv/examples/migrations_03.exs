@@ -105,29 +105,27 @@ defmodule MusicDB.Repo.Migrations.AddCompositionsArtistsTable do
   end
 end
 
-if Repo.using_postgres?() do
-  Repo.insert_all("compositions", [
-    [
-      title: "So What",
-      year: 1959,
-      artist_id: 1,
-      inserted_at: NaiveDateTime.utc_now(),
-      updated_at: NaiveDateTime.utc_now()
-    ]
-  ])
+Repo.insert_all("compositions", [
+  [
+    title: "So What",
+    year: 1959,
+    artist_id: 1,
+    inserted_at: NaiveDateTime.utc_now(),
+    updated_at: NaiveDateTime.utc_now()
+  ]
+])
 
-  Ecto.Migrator.up(Repo, 2, MusicDB.Repo.Migrations.AddCompositionsArtistsTable)
+Ecto.Migrator.up(Repo, 2, MusicDB.Repo.Migrations.AddCompositionsArtistsTable)
 
-  q = from(c in "compositions", where: c.title == "So What", select: [:id, :title, :year])
-  composition = Repo.one(q)
-  assert %{title: "So What", year: 1959} = composition
+q = from(c in "compositions", where: c.title == "So What", select: [:id, :title, :year])
+composition = Repo.one(q)
+assert %{title: "So What", year: 1959} = composition
 
-  q =
-    from(ca in "compositions_artists",
-      where: ca.composition_id == ^composition.id,
-      select: [:composition_id, :artist_id, :role]
-    )
+q =
+  from(ca in "compositions_artists",
+    where: ca.composition_id == ^composition.id,
+    select: [:composition_id, :artist_id, :role]
+  )
 
-  composition_artist = Repo.one(q)
-  assert %{artist_id: 1, role: "composer"} = composition_artist
-end
+composition_artist = Repo.one(q)
+assert %{artist_id: 1, role: "composer"} = composition_artist
